@@ -43,6 +43,7 @@ pip install timm==0.4.12
 pip install mmdet==2.22.0 # for Mask2Former
 pip install mmsegmentation==0.20.2
 pip install scipy
+pip install yapf==0.40.1
 ```
 cd into `./detection/ops/`
 run `python setup.py build install`

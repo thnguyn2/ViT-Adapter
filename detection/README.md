@@ -29,6 +29,24 @@ pip install instaboostfast # for htc++
 cd ops & sh make.sh # compile deformable attention
 ```
 
+## Install on PathAI cluster
+Use the `jabba-master` image. Use the terminal from the VS Code, not the one from Jupyterhub
+```
+conda create --name vitadapter python=3.8 -y
+conda activate vitadapter
+pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
+pip install mmcv-full==1.4.2 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.9.0/index.html
+conda install -c conda-forge cudatoolkit-dev 
+pip install -U opencv-python
+pip install timm==0.4.12
+pip install mmdet==2.22.0 # for Mask2Former
+pip install mmsegmentation==0.20.2
+pip install scipy
+pip install yapf==0.40.1
+```
+cd into `./detection/ops/`
+run `python setup.py build install`
+
 ## Data Preparation
 
 Prepare COCO according to the guidelines in [MMDetection v2.22.0](https://github.com/open-mmlab/mmdetection/blob/master/docs/en/1_exist_data_model.md).
@@ -237,8 +255,10 @@ Evaluate annotation type *segm*
 - I modified the path to the dataset in `coco_instance.py` and `coco_panoptic.py` within the folder `detection/config/_base_/datasets/` to point to the `/home/pathai/datasets/mmdetection/data/coco/` folder.
 - I further create a `pretrained` folder in the `detection` folder and download the checkpoint specified in `mask_rcnn_deit_adapter_tiny_fpn_3x_coco.py` to it.
 - Then, cd into the `VIT-adapter` code repo. Then, run the VITAdapter with Mask R-CNN on Coco Val2017 3x+MS using the following 
-command
+command to test the pre-trained model.
 `bash dist_test.sh configs/mask_rcnn/mask_rcnn_deit_adapter_tiny_fpn_3x_coco.py ../checkpoints/detection/mask_rcnn_deit_adapter_tiny_fpn_3x_coco.pth.tar 2 --eval bbox segm`.
+- To run the training
+`bash dist_train.sh configs/mask_rcnn/mask_rcnn_deit_adapter_tiny_fpn_3x_coco.py 2`.
 
 ## Training
 
