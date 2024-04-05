@@ -30,6 +30,20 @@ ln -s ../detection/ops ./
 cd ops & sh make.sh # compile deformable attention
 ```
 
+## Install on PathAI cluster
+Use the `jabba-master` image. Use the terminal from the VS Code, not the one from Jupyterhub
+```
+conda create --name vitadapter python=3.8 -y
+conda activate vitadapter
+pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
+pip install mmcv-full==1.4.2 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.9.0/index.html
+conda install -c conda-forge cudatoolkit-dev 
+pip install -U opencv-python
+pip install timm==0.4.12
+pip install mmdet==2.22.0 # for Mask2Former
+pip install mmsegmentation==0.20.2
+
+```
 ## Data Preparation
 
 Preparing ADE20K/Cityscapes/COCO Stuff/Pascal Context according to the [guidelines](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/en/dataset_prepare.md#prepare-datasets) in MMSegmentation.
