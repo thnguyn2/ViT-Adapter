@@ -42,8 +42,11 @@ pip install -U opencv-python
 pip install timm==0.4.12
 pip install mmdet==2.22.0 # for Mask2Former
 pip install mmsegmentation==0.20.2
-
+pip install scipy
 ```
+cd into `./detection/ops/`
+run `python setup.py build install`
+
 ## Data Preparation
 
 Preparing ADE20K/Cityscapes/COCO Stuff/Pascal Context according to the [guidelines](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/en/dataset_prepare.md#prepare-datasets) in MMSegmentation.

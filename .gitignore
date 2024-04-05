@@ -7,6 +7,8 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+checkpoints/
+detection/pretrained/
 .Python
 build/
 develop-eggs/

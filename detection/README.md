@@ -232,6 +232,14 @@ Evaluate annotation type *segm*
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.780
 ```
 
+### Tan's evaluation
+- I activate my virtual environment with `conda activate vitadapter`.
+- I modified the path to the dataset in `coco_instance.py` and `coco_panoptic.py` within the folder `detection/config/_base_/datasets/` to point to the `/home/pathai/datasets/mmdetection/data/coco/` folder.
+- I further create a `pretrained` folder in the `detection` folder and download the checkpoint specified in `mask_rcnn_deit_adapter_tiny_fpn_3x_coco.py` to it.
+- Then, cd into the `VIT-adapter` code repo. Then, run the VITAdapter with Mask R-CNN on Coco Val2017 3x+MS using the following 
+command
+`bash dist_test.sh configs/mask_rcnn/mask_rcnn_deit_adapter_tiny_fpn_3x_coco.py ../checkpoints/detection/mask_rcnn_deit_adapter_tiny_fpn_3x_coco.pth.tar 2 --eval bbox segm`.
+
 ## Training
 
 To train ViT-Adapter-T + Mask R-CNN on COCO train2017 on a single node with 8 gpus for 36 epochs run:
